@@ -1,0 +1,117 @@
+<ul class="menu" #ctxMenu hidden>
+  <li class="item">
+    <div class="flex flex-row items-center">
+      <div class="h-6 w-6">
+        <!-- <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ action.icon }}"></icons> -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
+      </div>
+      <span class="ml-2">Back</span>
+      <span class="grow"></span>
+      <span class="absolute right-0 mr-1 text-disabled text-xs flex-1">bksp</span>
+    </div>
+  </li>
+  <li class="item item--disabled">
+      <a href="javascript:window.history.go(1)">
+          <i class="fa-arrow-right"></i>
+          Forward
+          <span>shf + bksp</span>
+      </a>
+  </li>
+  <li class="item">
+      <a href="javascript:window.location.reload(true)">
+          <i class="fa-refresh"></i>
+          Reload
+        <span>alt + <small>F5</small></span>
+      </a>
+  </li>
+  <li class="divider"></li>
+  <li class="item">
+  <a>Profile</a>
+    <i class="post fa-angle-right"></i>
+  <ul class="menu sublet" hidden>
+    <li class="item">
+      <a href="#">
+          <i class="fa-inbox"> </i>
+          Inbox
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+        <i class="fa-user"> </i>
+        View Profile
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+          <i class="fa-pencil"> </i>
+          Edit Profile
+      </a>
+    </li>
+    <li class="item">
+      <a href="#">
+          <i class="fa-cog"> </i>
+          Preferences
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="divider"></li>
+<li class="item">
+      <a href="#">
+          <i class="fa-home"></i>
+          Home
+      </a>
+  </li>
+  <li class="item">
+      <a href="#">
+          <i class="fa-rss"></i>
+          RSS
+      </a>
+  </li>
+  <li class="item">
+      <a href="#">
+          <i class="fa-users"></i>
+          Community
+      </a>
+  </li>
+  <li class="divider"></li>
+  <li class="item share">
+    <a>Share</a>
+    <i class="post fa-angle-right"></i>
+    <ul class="menu sublet" hidden>
+      <li class="item">
+        <a class="link" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fportableappz.x10.mx%2F&amp;src=sdkpreparse" target="_blank" title="Facebook">
+          <i class="fa-facebook"> </i>
+          Facebook
+                    </a>
+      </li>
+      <li class="item">
+        <a class="link" href="https://twitter.com/share?text=PortableAppz.x10.mx%2F&amp;url=http%3A%2F%2Fportableappz.x10.mx%2F" target="_blank" title="Twitter">
+          <i class="fa-twitter"> </i>
+          Twitter
+        </a>
+      </li>
+      <li class="item">
+        <a class="link" href="https://plus.google.com/share?url=http%3A%2F%2Fportableappz.x10.mx%2F" target="_blank" title="Google+">
+          <i class="fa-google-plus-square"></i>
+          Google+
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="divider"></li>
+  <li class="item">
+    <a href="javascript:window.print()" title="Print">
+      <i class="fa-print"></i> 
+      Print
+      <span>ctrl + p</span>
+    </a>
+  </li>
+  <li class="item">
+    <a href="" title="View Source">
+      <i class="fa-code"></i> 
+      View Source
+      <span>ctrl + u</span>
+    </a>
+  </li>
+</ul>

@@ -2,5 +2,7 @@
  * Public API Surface of ngx-dynamic-contextmenu
  */
 
-export * from './lib/ngx-dynamic-contextmenu.service';
+// components
 export * from './lib/ngx-dynamic-contextmenu.component';
+
+// services
