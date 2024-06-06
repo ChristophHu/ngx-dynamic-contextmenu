@@ -96,6 +96,39 @@
           }
         }
       }
+    },
+    "ngx-dynamic-contextmenu": {
+      "projectType": "library",
+      "root": "projects/ngx-dynamic-contextmenu",
+      "sourceRoot": "projects/ngx-dynamic-contextmenu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-dynamic-contextmenu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-dynamic-contextmenu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-dynamic-contextmenu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-dynamic-contextmenu/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }
