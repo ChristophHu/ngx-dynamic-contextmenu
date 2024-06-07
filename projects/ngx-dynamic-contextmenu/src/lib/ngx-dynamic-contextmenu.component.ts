@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { MenuItem } from './models/menuitem.model';
+import { NgxIconsComponent } from '@christophhu/ngx-icons';
 
 @Component({
   selector: 'ngx-dynamic-contextmenu',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    NgxIconsComponent
   ],
   templateUrl: './ngx-dynamic-contextmenu.component.html',
   styleUrls: ['./ngx-dynamic-contextmenu.component.sass']
@@ -21,6 +24,13 @@ export class NgxDynamicContextmenuComponent {
   // handleKeyboardEvent(event: KeyboardEvent) {
   //   console.log('Key pressed:', event.key);
   // }
+  items: MenuItem[] = [
+    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: () => { console.log('Item 1') } },
+    { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: () => { console.log('Item 1') } },
+    { id: '3', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', items: [
+      { id: '31', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: () => { console.log('Item 1') } }
+    ], action: () => { console.log('Item 1') } }
+  ]
 
   constructor(private elementRef: ElementRef) {}
 
