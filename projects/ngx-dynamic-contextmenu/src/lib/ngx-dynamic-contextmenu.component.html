@@ -1,10 +1,10 @@
 <ul class="menu w-48" #ctxMenu hidden>
-  <li class="item" *ngFor="let item of items">
-    <!-- <ng-container *ngIf="!item.items"> -->
+  <ng-container *ngFor="let item of items">
+    <hr *ngIf="item.devider" class="h-px bg-borderline border-none" />
+    <li class="item">
       <div class="flex flex-row items-center" (click)="item.action()">
         <div class="h-5 w-5">
           <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ item.icon }}"></icons>
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg> -->
         </div>
         <span class="ml-2">{{ item.label }}</span>
         <span class="grow"></span>
@@ -17,12 +17,11 @@
           <span class="absolute right-2 text-disabled text-xs flex-1">{{ item.shortcut }}</span>
         }
         <ng-container *ngIf="item.items">
-          <ul class="menu sublet" hidden>
+          <ul class="menu sublet w-48" hidden>
             <li class="item" *ngFor="let subitem of item.items">
               <div class="flex flex-row items-center">
                 <div class="h-5 w-5">
                   <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ subitem.icon }}"></icons>
-                  <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" /><path d="M20 4v5h-5" /></svg> -->
                 </div>
                 <span class="ml-2">{{ subitem.label }}</span>
                 <span class="grow"></span>
@@ -32,6 +31,9 @@
           </ul>
         </ng-container>
       </div>
+    </li>
+  </ng-container>
+  
 
   <!-- <li class="item">
     <div class="flex flex-row items-center">

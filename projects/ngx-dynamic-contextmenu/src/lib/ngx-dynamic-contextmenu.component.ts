@@ -27,9 +27,12 @@ export class NgxDynamicContextmenuComponent {
   items: MenuItem[] = [
     { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: () => { console.log('Item 1') } },
     { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: () => { console.log('Item 1') } },
-    { id: '3', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', items: [
-      { id: '31', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: () => { console.log('Item 1') } }
-    ], action: () => { console.log('Item 1') } }
+    { id: '3', label: 'Teilen', devider: true, items: [
+      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: () => { console.log('Item 1') } },
+      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: 'Strg + I', action: () => { console.log('Item 1') } }
+    ], action: () => { console.log('Item 1') } },
+    { id: '4', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: () => { console.log('Item 1') } },
+
   ]
 
   constructor(private elementRef: ElementRef) {}
