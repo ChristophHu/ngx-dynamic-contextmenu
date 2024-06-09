@@ -32,7 +32,7 @@ export class AppComponent {
       { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: '3' },
       { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: 'Strg + I', action: '4' }
     ]},
-    { id: '4', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: '5' },
+    { id: '4', label: 'Forward', class:"danger", icon: 'dots', shortcut: 'Strg + F', action: '5' },
 
   ]
 

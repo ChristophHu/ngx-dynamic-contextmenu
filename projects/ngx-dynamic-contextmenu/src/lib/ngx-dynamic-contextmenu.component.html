@@ -1,7 +1,7 @@
-<ul class="menu w-48" #ctxMenu hidden>
+<ul class="menu w-48" id="id" #ctxMenu hidden>
   <ng-container *ngFor="let item of items">
     <hr *ngIf="item.devider" class="h-px bg-borderline border-none" />
-    <li class="item">
+    <li class="item relative m-1 rounded hover:bg-accent hover:text-light" [id]="item.id" [ngClass]="item.class">
       <div class="flex flex-row items-center" (click)="runaction(item)">
         <div class="h-5 w-5">
           <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ item.icon }}"></icons>
@@ -18,7 +18,7 @@
         }
         <ng-container *ngIf="item.items">
           <ul class="menu sublet w-48" hidden>
-            <li class="item" *ngFor="let subitem of item.items">
+            <li class="item relative m-1 rounded hover:bg-accent hover:text-light" *ngFor="let subitem of item.items">
               <div class="flex flex-row items-center">
                 <div class="h-5 w-5">
                   <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ subitem.icon }}"></icons>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ContextItem } from './models/context-item.model';
 import { NgxIconsComponent } from '@christophhu/ngx-icons';
 
@@ -13,7 +13,7 @@ import { NgxIconsComponent } from '@christophhu/ngx-icons';
   templateUrl: './ngx-dynamic-contextmenu.component.html',
   styleUrls: ['./ngx-dynamic-contextmenu.component.sass']
 })
-export class NgxDynamicContextmenuComponent {
+export class NgxDynamicContextmenuComponent implements AfterViewInit {
   @ViewChild('ctxMenu') ctxMenu: any
   @Input() items: ContextItem[] = []
   @Output() action: EventEmitter<any> = new EventEmitter<any>()
@@ -23,7 +23,26 @@ export class NgxDynamicContextmenuComponent {
   innerHeight: number = window.innerHeight
   innerWidth: number = window.innerWidth
 
-  constructor(private elementRef: ElementRef) {}
+  constructor() {
+
+  }
+
+  ngAfterViewInit(): void {
+    this.items.forEach(item => {
+      if (item.class) {
+        let el = document.getElementById(item.id)
+        if (el) {
+          // el.classList.replace('item', item.class + ' item', )
+          // el.classList.remove('item')
+          // el.classList.add(item.class)
+        }
+      }
+    })
+  }
+
+  ngOnInit(): void {
+
+  }
 
   @HostListener('window:resize', ['$event']) onResize(event: any) {
     this.ctxMenuClose()
