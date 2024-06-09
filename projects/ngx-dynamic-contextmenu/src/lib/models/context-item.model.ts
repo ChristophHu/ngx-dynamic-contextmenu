@@ -1,4 +1,4 @@
-export interface MenuItem {
+export interface ContextItem {
     id: string
     label: string
     action?: any
@@ -7,5 +7,5 @@ export interface MenuItem {
     disabled?: boolean
     hidden?: boolean
     icon?: string
-    items?: MenuItem[]
+    items?: ContextItem[]
 }

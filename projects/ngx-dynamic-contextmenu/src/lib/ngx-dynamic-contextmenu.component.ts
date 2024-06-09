@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { MenuItem } from './models/menuitem.model';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { ContextItem } from './models/context-item.model';
 import { NgxIconsComponent } from '@christophhu/ngx-icons';
 
 @Component({
@@ -15,21 +15,13 @@ import { NgxIconsComponent } from '@christophhu/ngx-icons';
 })
 export class NgxDynamicContextmenuComponent {
   @ViewChild('ctxMenu') ctxMenu: any
+  @Input() items: ContextItem[] = []
+  @Output() action: EventEmitter<any> = new EventEmitter<any>()
+
   isOpen = false
 
   innerHeight: number = window.innerHeight
   innerWidth: number = window.innerWidth
-
-  items: MenuItem[] = [
-    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: '1' },
-    { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: '2' },
-    { id: '3', label: 'Teilen', devider: true, items: [
-      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: '3' },
-      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: 'Strg + I', action: '4' }
-    ]},
-    { id: '4', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: '5' },
-
-  ]
 
   constructor(private elementRef: ElementRef) {}
 
@@ -72,8 +64,7 @@ export class NgxDynamicContextmenuComponent {
     this.ctxMenu.nativeElement.hidden = false
   }
 
-  runaction(item: MenuItem) {
-    console.log(item)
-    // if (item.action) item.action()
+  runaction(item: ContextItem) {
+    this.action.emit({ id: item.id, action: item.action })
   }
 }
