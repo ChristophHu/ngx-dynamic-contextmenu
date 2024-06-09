@@ -2,7 +2,7 @@
   <ng-container *ngFor="let item of items">
     <hr *ngIf="item.devider" class="h-px bg-borderline border-none" />
     <li class="item">
-      <div class="flex flex-row items-center" (click)="item.action()">
+      <div class="flex flex-row items-center" (click)="runaction(item)">
         <div class="h-5 w-5">
           <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ item.icon }}"></icons>
         </div>

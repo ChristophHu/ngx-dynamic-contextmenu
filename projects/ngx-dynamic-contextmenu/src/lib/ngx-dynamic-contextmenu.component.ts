@@ -20,18 +20,14 @@ export class NgxDynamicContextmenuComponent {
   innerHeight: number = window.innerHeight
   innerWidth: number = window.innerWidth
 
-  // @HostListener('document:keydown', ['$event'])
-  // handleKeyboardEvent(event: KeyboardEvent) {
-  //   console.log('Key pressed:', event.key);
-  // }
   items: MenuItem[] = [
-    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: () => { console.log('Item 1') } },
-    { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: () => { console.log('Item 1') } },
+    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: '1' },
+    { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: '2' },
     { id: '3', label: 'Teilen', devider: true, items: [
-      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: () => { console.log('Item 1') } },
-      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: 'Strg + I', action: () => { console.log('Item 1') } }
-    ], action: () => { console.log('Item 1') } },
-    { id: '4', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: () => { console.log('Item 1') } },
+      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: '3' },
+      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: 'Strg + I', action: '4' }
+    ]},
+    { id: '4', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: '5' },
 
   ]
 
@@ -62,6 +58,10 @@ export class NgxDynamicContextmenuComponent {
     }
     event.preventDefault()
   }
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    console.log('Key pressed:', event.key);
+  }
 
   ctxMenuClose() {
     this.isOpen = false
@@ -70,5 +70,10 @@ export class NgxDynamicContextmenuComponent {
   ctxMenuOpen() {
     this.isOpen = true
     this.ctxMenu.nativeElement.hidden = false
+  }
+
+  runaction(item: MenuItem) {
+    console.log(item)
+    // if (item.action) item.action()
   }
 }
