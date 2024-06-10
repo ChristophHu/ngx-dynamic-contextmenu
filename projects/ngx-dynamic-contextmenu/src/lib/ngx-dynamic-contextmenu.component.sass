@@ -35,10 +35,6 @@
 
 .header, .item 
     @apply p-1
-    // padding-left: 2.5em
-    // padding-right: 1.5em
-    // padding-top: 0.3em
-    // padding-bottom: 0.35em
 
 .header, .divider 
     margin-top: 0.25em
@@ -55,15 +51,11 @@
 // .item:not(.item--disabled):hover
 //     @apply bg-accent text-light
 
+.disabled 
+    @apply bg-secondary cursor-not-allowed
+
 .item:not(.item--disabled):hover .sublet
     @apply visible rounded opacity-100 translate-x-0
-    // opacity: 1
-    // -webkit-transform: translateX(0)
-    // transform: translateX(0)
-    // -webkit-transition-delay: 0.2s, 0.25s, 0.2s, 0.2s, 0s
-    // transition-delay: 0.2s, 0.25s, 0.2s, 0.2s, 0s
-    // border-radius: 0 3px 3px 3px
-    // visibility: visible
 
 .item:last-child
     @apply mb-1 

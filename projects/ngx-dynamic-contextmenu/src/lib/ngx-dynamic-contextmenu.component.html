@@ -1,8 +1,8 @@
 <ul class="menu w-48" id="id" #ctxMenu hidden>
   <ng-container *ngFor="let item of items">
     <hr *ngIf="item.devider" class="h-px bg-borderline border-none" />
-    <li class="item relative m-1 rounded hover:bg-accent hover:text-light" [id]="item.id" [ngClass]="item.class">
-      <div class="flex flex-row items-center" (click)="runaction(item)">
+    <li class="item relative m-1 rounded" [id]="item.id" [ngClass]="item.disabled ? 'hover:bg-borderline text-static_gray pointer-events-none' : 'hover:bg-accent'">
+      <button class="flex flex-row items-center"  (click)="runaction(item)">
         <div class="h-5 w-5">
           <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ item.icon }}"></icons>
         </div>
@@ -18,7 +18,7 @@
         }
         <ng-container *ngIf="item.items">
           <ul class="menu sublet w-48" hidden>
-            <li class="item relative m-1 rounded hover:bg-accent hover:text-light" *ngFor="let subitem of item.items">
+            <li class="item relative m-1 rounded" *ngFor="let subitem of item.items" [ngClass]="item.disabled ? 'hover:bg-borderline text-static_gray pointer-events-none' : 'hover:bg-accent'">
               <div class="flex flex-row items-center">
                 <div class="h-5 w-5">
                   <icons class="w-8 h-8 stroke-1 stroke-current" name="{{ subitem.icon }}"></icons>
@@ -30,7 +30,7 @@
             </li>
           </ul>
         </ng-container>
-      </div>
+      </button>
     </li>
   </ng-container>
   

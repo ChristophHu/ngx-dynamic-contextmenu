@@ -84,6 +84,6 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
   }
 
   runaction(item: ContextItem) {
-    this.action.emit({ id: item.id, action: item.action })
+    if (!item.disabled) this.action.emit({ id: item.id, action: item.action })
   }
 }

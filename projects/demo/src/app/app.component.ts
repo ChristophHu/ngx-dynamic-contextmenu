@@ -26,7 +26,7 @@ enum ContextActionEnum {
 })
 export class AppComponent {
   items: ContextItem[] = [
-    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', action: ContextActionEnum.DELETE },
+    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', disabled: true, action: ContextActionEnum.DELETE },
     { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: ContextActionEnum.EDIT },
     { id: '3', label: 'Teilen', devider: true, items: [
       { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: '3' },
