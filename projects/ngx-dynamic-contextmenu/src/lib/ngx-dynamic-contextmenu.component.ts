@@ -4,6 +4,7 @@ import { ContextItem } from './models/context-item.model';
 import { NgxIconsComponent } from '@christophhu/ngx-icons';
 import { sequence, shortcut } from './helpers/shortcut';
 import { Observable, map, merge, tap } from 'rxjs';
+import { ContextDefaultActions } from './models/context-default-actions.model';
 
 // interface ShortcutAction {
 //   [key: any]: any
@@ -22,6 +23,7 @@ import { Observable, map, merge, tap } from 'rxjs';
 export class NgxDynamicContextmenuComponent implements AfterViewInit {
   @ViewChild('ctxMenu') ctxMenu: any
   @Input() items: ContextItem[] = []
+  @Input() element: any | undefined
   @Output() action: EventEmitter<any> = new EventEmitter<any>()
 
   isOpen = false
@@ -108,6 +110,7 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
       if (sijX + this.ctxMenu.nativeElement.offsetWidth > this.innerWidth) sijX -= this.ctxMenu.nativeElement.offsetWidth;
       this.ctxMenu.nativeElement.style.left = Math.max(sijX, 0) + 'px'
       this.ctxMenu.nativeElement.style.top = Math.max(sijY, 0) + 'px'
+      this.action.emit({ id: this.element?.id, action: ContextDefaultActions.OPEN })
     } else {
       this.ctxMenuClose()
     }

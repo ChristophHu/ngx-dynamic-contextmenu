@@ -1,4 +1,5 @@
 import { KeyCode } from "../helpers/keycodes"
+import { ContextDefaultActions } from "./context-default-actions.model"
 import { ContextItemClassEnum } from "./item-class.model"
 
 /**
@@ -22,7 +23,7 @@ export interface ContextItem {
     /** The label is the shown label of the item in the context-menu. */
     label: string
     /** The action is an optional output of the item by clicking the context-menu-item. */
-    action?: any
+    action?: ContextDefaultActions | any
     /** The optional class is used to style the context-menu-item. */
     class?: ContextItemClassEnum
     /** The optional devider devides the context-menu-item to the item above. */

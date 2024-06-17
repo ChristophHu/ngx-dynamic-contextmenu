@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NgxDynamicContextmenuComponent } from '../../../ngx-dynamic-contextmenu/src/public-api';
 import { ContextItem } from '../../../ngx-dynamic-contextmenu/src/lib/models/context-item.model';
 import { ContextItemClassEnum } from '../../../ngx-dynamic-contextmenu/src/lib/models/item-class.model';
+import { ContextDefaultActions } from '../../../ngx-dynamic-contextmenu/src/lib/models/context-default-actions.model';
 import { KeyCode } from '../../../ngx-dynamic-contextmenu/src/lib/helpers/keycodes';
 import { sequence, shortcut } from '../../../ngx-dynamic-contextmenu/src/lib/helpers/shortcut';
 import { Observable, map, merge, tap } from 'rxjs';
@@ -13,10 +14,10 @@ interface ContextActionReturn {
   action: string
 }
 enum ContextActionEnum {
-  DELETE = '1',
-  EDIT = '2',
-  SHOW = '3',
-  REFRESH = '4'
+  DELETE = 'delete',
+  EDIT = 'edit',
+  SHOW = 'show',
+  REFRESH = 'refresh'
 }
 
 @Component({
@@ -35,22 +36,25 @@ export class AppComponent {
     { id: '1', label: 'Back', icon: 'dot', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyL], disabled: true, action: ContextActionEnum.DELETE },
     { id: '2', label: 'Forward', icon: 'dots', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyO], action: ContextActionEnum.EDIT },
     { id: '3', label: 'Teilen', devider: true, items: [
-      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyD], action: '3' },
-      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyI], action: '4' }
+      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyD], action: ContextActionEnum.EDIT },
+      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyI], action: ContextActionEnum.EDIT }
     ]},
     { id: '4', label: 'Forward', class: ContextItemClassEnum.INFO, icon: 'dots', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyA], action: '5' }
   ]
 
   returnContextAction(event: ContextActionReturn) {
     switch (event.action) {
+      case ContextDefaultActions.OPEN.toString():
+        console.log('is open', event.id)
+        break
       case ContextActionEnum.DELETE:
-        console.log('delete row')
+        console.log('delete row', event.id)
         break
       case ContextActionEnum.EDIT:
-        console.log('edit row')
+        console.log('edit row', event.id)
         break
       default:
-        console.log('default contextaction')
+        console.log('default contextaction', event.id)
     }
   }
 
