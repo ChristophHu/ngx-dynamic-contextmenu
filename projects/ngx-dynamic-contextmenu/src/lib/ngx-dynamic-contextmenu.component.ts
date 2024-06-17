@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { ContextItem } from './models/context-item.model';
 import { NgxIconsComponent } from '@christophhu/ngx-icons';
+import { sequence, shortcut } from './helpers/shortcut';
+import { Observable, map, merge, tap } from 'rxjs';
+
+// interface ShortcutAction {
+//   [key: any]: any
+// }
 
 @Component({
   selector: 'ngx-dynamic-contextmenu',
@@ -19,6 +25,9 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
   @Output() action: EventEmitter<any> = new EventEmitter<any>()
 
   isOpen = false
+  isShortcutActivated = false
+
+  shortcuts$: Observable<string> | undefined
 
   innerHeight: number = window.innerHeight
   innerWidth: number = window.innerWidth
@@ -28,21 +37,56 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // let sc: any[] = []
+    let sc: { shortcut: any, action: any }[] = []
     this.items.forEach(item => {
+      // add class to element
       if (item.class) {
         let el = document.getElementById(item.id)
         if (el) {
-          // el.classList.replace('item', item.class + ' item', )
-          // el.classList.remove('item')
-          // el.classList.add(item.class)
+          el.classList.add(item.class)
         }
       }
+      // add shortcuts
+      if (item.shortcut) {
+        sc.push({ shortcut: shortcut(item.shortcut).pipe(
+          sequence()
+        ), action: item.action })
+        // sc.push(shortcut(item.shortcut).pipe(
+        //   sequence()
+        // ))
+
+      }
     })
+    this.shortcuts$ = merge(
+      ...sc.map((s) => s.shortcut)
+    ).pipe(
+      tap((y: any) => console.log('aus', y)),
+      map((arr: any) => arr.map((a: any) => a.code).join("+"))
+    ).pipe(
+      tap((x: any) => console.log('test2', x))
+    )
   }
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
+  //   const search = shortcut([KeyCode.ShiftLeft, KeyCode.KeyO]).pipe(
+  //     sequence(),
+  //     tap(() => alert('test'))
+  //   )
+  //   const find = shortcut([KeyCode.ShiftLeft, KeyCode.KeyI]).pipe(
+  //     sequence(),
+  //     tap(() => alert('test'))
+  //   )
 
-  }
+  //   this.shortcuts$ = merge(
+  //     search,
+  //     find
+  //   ).pipe(
+  //     map((arr: any) => arr.map((a: any) => a.code).join("+"))
+  //   ).pipe(
+  //     tap(() => alert('test2'))
+  //   )
+  // }
 
   @HostListener('window:resize', ['$event']) onResize(event: any) {
     this.ctxMenuClose()
@@ -69,10 +113,10 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
     }
     event.preventDefault()
   }
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    console.log('Key pressed:', event.key);
-  }
+  // @HostListener('document:keydown', ['$event'])
+  // handleKeyboardEvent(event: KeyboardEvent) {
+  //   if (this.isShortcutActivated) console.log('Key pressed:', event);
+  // }
 
   ctxMenuClose() {
     this.isOpen = false

@@ -1,3 +1,6 @@
+import { KeyCode } from "../helpers/keycodes"
+import { ContextItemClassEnum } from "./item-class.model"
+
 /**
  * This is the description of the interface
  *
@@ -5,6 +8,7 @@
  * @param {string} id is used for whatever reason
  * @param {string} label is used for whatever reason
  * @param {any} action is used for whatever reason
+ * @param {ContextItemClassEnum} [class] is used for whatever reason
  * @param {boolean} [devider] is used for whatever reason
  * @param {boolean} [disabled] is used for whatever reason
  * @param {boolean} [hidden] is used for whatever reason
@@ -19,7 +23,8 @@ export interface ContextItem {
     label: string
     /** The action is an optional output of the item by clicking the context-menu-item. */
     action?: any
-    class?: string
+    /** The optional class is used to style the context-menu-item. */
+    class?: ContextItemClassEnum
     /** The optional devider devides the context-menu-item to the item above. */
     devider?: boolean
     /** Disabled items can't be clicked. */
@@ -31,5 +36,5 @@ export interface ContextItem {
     /** The optional items are generation an new submenu. */
     items?: ContextItem[]
     /** The optional shortcuts show the keys to be pressed. */
-    shortcut?: string
+    shortcut?: KeyCode[]
 }

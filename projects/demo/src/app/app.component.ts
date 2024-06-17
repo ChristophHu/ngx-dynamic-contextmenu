@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxDynamicContextmenuComponent } from '../../../ngx-dynamic-contextmenu/src/public-api';
 import { ContextItem } from '../../../ngx-dynamic-contextmenu/src/lib/models/context-item.model';
+import { ContextItemClassEnum } from '../../../ngx-dynamic-contextmenu/src/lib/models/item-class.model';
+import { KeyCode } from '../../../ngx-dynamic-contextmenu/src/lib/helpers/keycodes';
+import { sequence, shortcut } from '../../../ngx-dynamic-contextmenu/src/lib/helpers/shortcut';
+import { Observable, map, merge, tap } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 interface ContextActionReturn {
   id: string
@@ -18,22 +23,22 @@ enum ContextActionEnum {
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     NgxDynamicContextmenuComponent,
     RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
-export class AppComponent {
+export class AppComponent { 
   items: ContextItem[] = [
-    { id: '1', label: 'Back', icon: 'dot', shortcut: 'Strg + R', disabled: true, action: ContextActionEnum.DELETE },
-    { id: '2', label: 'Forward', icon: 'dots', shortcut: 'Strg + F', action: ContextActionEnum.EDIT },
+    { id: '1', label: 'Back', icon: 'dot', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyL], disabled: true, action: ContextActionEnum.DELETE },
+    { id: '2', label: 'Forward', icon: 'dots', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyO], action: ContextActionEnum.EDIT },
     { id: '3', label: 'Teilen', devider: true, items: [
-      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: 'Strg + R', action: '3' },
-      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: 'Strg + I', action: '4' }
+      { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyD], action: '3' },
+      { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyI], action: '4' }
     ]},
-    { id: '4', label: 'Forward', class:"danger", icon: 'dots', shortcut: 'Strg + F', action: '5' },
-
+    { id: '4', label: 'Forward', class: ContextItemClassEnum.INFO, icon: 'dots', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyA], action: '5' }
   ]
 
   returnContextAction(event: ContextActionReturn) {
@@ -48,4 +53,6 @@ export class AppComponent {
         console.log('default contextaction')
     }
   }
+
+  
 }
