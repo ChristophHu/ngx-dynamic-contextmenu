@@ -39,7 +39,7 @@ export class AppComponent {
       { id: '31', label: 'Facebook', icon: 'brand-facebook', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyD], action: ContextActionEnum.EDIT },
       { id: '32', label: 'Instagram', icon: 'brand-instagram', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyI], action: ContextActionEnum.EDIT }
     ]},
-    { id: '4', label: 'Forward', class: ContextItemClassEnum.INFO, icon: 'dots', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyA], action: '5' }
+    { id: '4', label: 'Forward', class: ContextItemClassEnum.DANGER, icon: 'dots', shortcut: [KeyCode.ShiftLeft, KeyCode.KeyA], action: '5' }
   ]
 
   returnContextAction(event: ContextActionReturn) {

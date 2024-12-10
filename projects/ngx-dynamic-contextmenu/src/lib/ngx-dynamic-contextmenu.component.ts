@@ -31,7 +31,7 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
   isOpen = false
   isShortcutActivated = false
 
-  shortcuts$: Observable<string> | undefined
+  shortcuts$: Observable<any> | undefined
 
   innerHeight: number = window.innerHeight
   innerWidth: number = window.innerWidth
@@ -42,7 +42,7 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // let sc: any[] = []
-    let sc: { shortcut: any, action: any }[] = []
+    let sc: { id: string, shortcut: any, action: any }[] = []
     this.items.forEach(item => {
       // add class to element
       if (item.class) {
@@ -53,32 +53,25 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
       }
       // add shortcuts
       if (item.shortcut) {
-        sc.push({ shortcut: shortcut(item.shortcut).pipe(
+        sc.push({ action: item.action, id: item.id, shortcut: shortcut(item.shortcut).pipe(
           sequence()
-        ), action: item.action })
+        )})
       }
       // add subitem shortcuts
       if (item.items) {
         item.items.forEach(subitem => {
           if (subitem.shortcut) {
-            sc.push({ shortcut: shortcut(subitem.shortcut).pipe(
+            sc.push({ action: subitem.action, id: subitem.id, shortcut: shortcut(subitem.shortcut).pipe(
               sequence()
-            ), action: subitem.action })
+            )})
           }
         })
       }
     })
-    console.log('test', sc)
-    this.shortcuts$ = merge(
-      ...sc.map((s) => s.shortcut)
-    )
-    .pipe(
-      tap((x: any) => console.log('test1', x)),
-      map((arr: any) => arr.map((a: any) => a.code))
-    )
-    .pipe(
-      tap((x: any) => console.log('test2', x))
-    )
+
+    sc.map((s) => s.shortcut.subscribe((x: any) => {
+      this.runaction({ id: s.id, action: s.action })
+    }))
   }
 
   @HostListener('window:resize', ['$event']) onResize(event: any) {
@@ -117,7 +110,7 @@ export class NgxDynamicContextmenuComponent implements AfterViewInit {
     this.ctxMenu.nativeElement.hidden = false
   }
 
-  runaction(item: ContextItem) {
+  runaction(item: Partial<ContextItem>) {
     if (!item.disabled) this.action.emit({ id: item.id, action: item.action })
   }
 }
